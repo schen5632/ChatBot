@@ -8,11 +8,12 @@
         "How are you",
         "Is anyone there?",
         "Hello",
-        "Good day"
+        "Good day",
+        "How's it going"
       ],
       "responses": [
-        "Hey :-)",
-        "Hello, thanks for visiting",
+        "Hello, how can I help?",
+        "Hello, how can I assist?",
         "Hi there, what can I do for you?",
         "Hi there, how can I help?"
       ]
@@ -34,11 +35,23 @@
     {
       "tag": "items",
       "patterns": [
+        "What can I buy?",
         "Which items do you have?",
         "What kinds of items are there?",
         "What do you sell?"
       ],
-      "responses": ["We sell coffee and tea", "We have coffee and tea"]
+      "responses": ["We sell tech products including headphones, laptops, and iPads"]
+    },
+    {
+      "tag": "customer support",
+      "patterns": [
+        "How can I signup?",
+        "Where can I login",
+        "How can I reset my password?",
+        "I forgot my password",
+        "Where can I get an account"
+      ],
+      "responses": ["You can signup and reset password on our website"]
     },
     {
       "tag": "payments",
@@ -61,18 +74,6 @@
         "When do I get my delivery?"
       ],
       "responses": ["Delivery takes 2-4 days", "Shipping takes 2-4 days"]
-    },
-    {
-      "tag": "funny",
-      "patterns": [
-        "Tell me a joke!",
-        "Tell me something funny!",
-        "Do you know a joke?"
-      ],
-      "responses": [
-        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
-        "What did the buffalo say when his son left for college? Bison."
-      ]
     }
   ]
 }
