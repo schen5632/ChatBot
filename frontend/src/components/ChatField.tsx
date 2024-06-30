@@ -1,4 +1,6 @@
 import {
+  Avatar,
+  Grid,
   InputAdornment,
   List,
   ListItem,
@@ -11,6 +13,8 @@ import React, { useCallback, useRef, useState } from "react";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import { Message, postBody } from "../interfaces/types";
 import axios from "axios";
+import SmartToySharpIcon from "@mui/icons-material/SmartToySharp";
+import PersonIcon from "@mui/icons-material/Person";
 
 const ChatField = () => {
   const [input, setInput] = useState<string>("");
@@ -32,7 +36,7 @@ const ChatField = () => {
 
       console.log(data);
 
-      // Map the partial data to Post objects
+      // Map the partial data to message objects
       const answer: Message = {
         id: messages.length + 2,
         sender: "bot",
@@ -94,9 +98,10 @@ const ChatField = () => {
           // p: 2,
           mb: 4,
           mt: 2,
+          mx: 10,
           height: "70vh",
           overflowY: "auto",
-          width: "90vw",
+          // width: "80vw",
           // border: "1px solid #ddd",
           // borderRadius: "4px",
           // backgroundColor: "#f9f9f9",
@@ -112,16 +117,57 @@ const ChatField = () => {
                   message.sender === "user" ? "flex-end" : "flex-start",
               }}
             >
-              <Paper
-                sx={{
-                  p: 1,
-                  maxWidth: "75%",
-                  backgroundColor:
-                    message.sender === "user" ? "#d1e7dd" : "#f8d7da",
-                }}
-              >
-                <Typography variant="body1">{message.content}</Typography>
-              </Paper>
+              {message.sender === "user" ? (
+                <Grid container justifyContent="flex-end" spacing={2}>
+                  <Grid item>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        maxWidth: "75%",
+                        backgroundColor: "DodgerBlue",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: "white",
+                        }}
+                      >
+                        {message.content}
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid item>
+                    <Avatar sx={{ bgcolor: "light gray", mr: 2 }}>
+                      <PersonIcon />
+                    </Avatar>
+                  </Grid>
+                </Grid>
+              ) : (
+                <Grid container justifyContent="flex-start">
+                  <Grid item>
+                    <Avatar sx={{ bgcolor: "light gray", mr: 2 }}>
+                      <SmartToySharpIcon />
+                    </Avatar>
+                  </Grid>
+                  <Grid item>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        maxWidth: "75%",
+                        backgroundColor: "GhostWhite",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: "black",
+                        }}
+                      >
+                        {message.content}
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                </Grid>
+              )}
             </ListItem>
           ))}
         </List>
@@ -137,8 +183,8 @@ const ChatField = () => {
           id="outlined-basic"
           label="Message Chatbot"
           variant="outlined"
-          value={input} // Bind the state to the input field
-          onChange={updateInput} // Update state on input change
+          value={input}
+          onChange={updateInput}
           onKeyDown={handleKeyPress}
           sx={{ borderRadius: 4, width: "90%" }}
           InputProps={{
