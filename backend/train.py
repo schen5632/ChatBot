@@ -47,6 +47,7 @@ for (pattern_sentence, tag) in xy:
     label = tags.index(tag)
     y_train.append(label)
 
+# we want to use our x variable (bag of words) to predict the y variable (tags)
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
@@ -59,6 +60,7 @@ hidden_size = 8
 output_size = len(tags)
 print(input_size, output_size)
 
+#Dataset class for training
 class ChatDataset(Dataset):
 
     def __init__(self):
@@ -89,11 +91,14 @@ for epoch in range(num_epochs):
     for (words, labels) in train_loader:
         words = words.to(device)
         labels = labels.to(dtype=torch.long).to(device)
-        
+
+        # forward pass using model
         outputs = model(words)
+
+        # compare model output (predicted tag) with true output (actual tag) using a loss function
         loss = criterion(outputs, labels)
         
-        # Backward and optimize
+        # Backpropogation to see how much each weight contributed to the error (weights are parameters to adjust how input data is transformed as it moves through the network)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -113,6 +118,7 @@ data = {
     "tags": tags
 }
 
+# save the trained model to file
 FILE = "data.pth"
 torch.save(data, FILE)
 
